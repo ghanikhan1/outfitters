@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\UserDashboardContoller;
+use App\Http\Controllers\Frontend\UserProfileContoller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +31,8 @@ Route::get('admin/login', [\App\Http\Controllers\Backend\AdminController::class,
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function (){
     Route::get('dashboard',[UserDashboardContoller::class, 'index'])->name('dashboard');
+    Route::get('profile', [UserProfileContoller::class, 'index'])->name('profile');
+    Route::put('profile', [UserProfileContoller::class, 'updateProfile'])->name('profile.update');
+    Route::post('profile', [UserProfileContoller::class, 'updatePassword'])->name('profile.update.password');
+
 });
